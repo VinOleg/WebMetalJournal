@@ -1,0 +1,72 @@
+﻿@model WebMetalJournal.Models.ViewModel.JournalIndexViewModel
+@{ViewData["Title"] = "Вывод журналов"; }
+<audio id="SoundBook" src="/Audio/bookopen.mp3" preload="auto"></audio>
+<a asp-action="Index" asp-controller="Journal" asp-route-id="@(Model.Page - 1)" onclick="Sound()"><img src="/img/left.png" height="50" width="50" alt="left404" class="ArrowLeft" id="ArrowLeft" /></a>
+<a asp-action="Index" asp-controller="Journal" asp-route-id="@(Model.Page + 1)" onclick="Sound()"><img src="/img/right.png" height="50" width="50" alt="right404" class="ArrowRight" id="ArrowRight" /></a>
+<h1>Лист @(Model.Page + 1) от @Model.Journal.First().CreatedForList.ToString("d MMMM yyyy")</h1>
+<table class="table table-hover">
+    <tr>
+        <td>Номер: </td>
+        <td>Номенклатура: </td>
+        <td>Целевой внешний диаметр: </td>
+        <td>Измеренный внешний диаметр по концу 1:</td>
+        <td>Измеренный внешний диаметр по концу 2:</td>
+        <td>Измеренный внешний диаметр по центру:</td>
+        <td>Максимальное отклонение измеренных диаметров от целевого:</td>
+        <td>Примечание:</td>
+    </tr>
+    @foreach (Journal j in Model.Journal)
+    {
+        @if (Math.Abs(j.TargetOuterD - j.MeasuredOuterDOne) > j.MaxDeviat)
+        {
+            <tr>
+                <td style="background-color:red"><h3>@j.Number</h3></td>
+                <td style="background-color:red"><h3>@j.Nomenclature</h3></td>
+                <td style="background-color:red"><h3>@j.TargetOuterD мм</h3></td>
+                <td style="background-color:red"><h3>@j.MeasuredOuterDOne мм</h3></td>
+                <td style="background-color:red"><h3>@j.MeasuredOuterDTwo мм</h3></td>
+                <td style="background-color:red"><h3>@j.MeasuredOuterDNotReq мм</h3></td>
+                <td style="background-color:red"><h3>@j.MaxDeviat мм</h3></td>
+                <td style="background-color:red"><h3>@j.Note</h3></td>
+                <td style="background-color:red">
+                    <a asp-action="Edit" asp-controller="Journal" asp-route-id="@j.Id">
+                        <img src="https://img.icons8.com/metro/452/edit.png" width="25" height="25" />
+                    </a>
+                </td>
+                <td style="background-color:red">
+                    <a asp-action="Delete" asp-controller="Journal" asp-route-id="@j.Id">
+                        <img src="http://simpleicon.com/wp-content/uploads/trash.png" width="30" height="30" />
+                    </a>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td><h3>@j.Number</h3></td>
+                <td><h3>@j.Nomenclature</h3></td>
+                <td><h3>@j.TargetOuterD мм</h3></td>
+                <td><h3>@j.MeasuredOuterDOne мм</h3></td>
+                <td><h3>@j.MeasuredOuterDTwo мм</h3></td>
+                <td><h3>@j.MeasuredOuterDNotReq мм</h3></td>
+                <td><h3>@j.MaxDeviat мм</h3></td>
+                <td><h3>@j.Note</h3></td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Journal" asp-route-id="@j.Id">
+                        <img src="https://img.icons8.com/metro/452/edit.png" width="25" height="25" />
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-controller="Journal" asp-route-id="@j.Id">
+                        <img src="http://simpleicon.com/wp-content/uploads/trash.png" width="30" height="30" />
+                    </a>
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+<script>
+$(function () {
+    Paging(@Model.PagingStatus);
+});</script>

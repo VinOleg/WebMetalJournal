@@ -1,0 +1,18 @@
+﻿@model IEnumerable<NomenclatureDir>
+@{
+    ViewData["Title"] = "Вывод диаметров";
+    <table class="table table-hover">
+        <tr>
+            <td>Номер</td>
+            <td>Максимальное отклонение</td>
+        </tr>
+        @foreach (NomenclatureDir j in Model)
+        {
+    <tr>
+        <td><h3>@j.Number</h3></td>
+        <td><h3>@j.MaxDeviat</h3></td>
+    </tr>
+        }
+    </table>
+
+}

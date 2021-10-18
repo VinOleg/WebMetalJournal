@@ -1,0 +1,15 @@
+﻿@model IEnumerable<diameterDir>
+@{
+    ViewData["Title"] = "Вывод диаметров";
+    <table class="table table-hover">
+        <tr>
+            <td>диаметр</td>
+        </tr>
+        @foreach (diameterDir j in Model)
+        {
+            <tr>
+                <td><h3>@j.diam</h3></td>
+            </tr>
+        }
+        </table>
+        }

@@ -1,0 +1,34 @@
+﻿@model WebMetalJournal.Models.ViewModel.JournalCreateViewModel
+@{
+    SelectList select = new SelectList(Model.diameterDir, "diam", "diam");
+    ViewBag.Title = "Создать журнал"; }
+
+<form asp-action="create" asp-controller="Journal">
+
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" asp-for="Journal.Number" placeholder="Номер" required="required" value="">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" asp-for="Journal.Nomenclature" placeholder="Номенклатура" required="required" value="">
+    </div>
+    <div class="form-group">
+        <select class="form-control mt-1" asp-for="Journal.TargetOuterD" asp-items="select"></select>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" asp-for="Journal.MeasuredOuterDOne" placeholder="Измеренный внешний диаметр 1" value="">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" asp-for="Journal.MeasuredOuterDNotReq" placeholder="Измеренный внешний диаметр центр" value="">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" asp-for="Journal.MeasuredOuterDTwo" placeholder="Измеренный внешний диаметр 2" value="">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" asp-for="Journal.Note" placeholder="Примечание" value="">
+    </div>
+    @Html.ValidationMessageFor(m => m.Journal)
+    <div class="form-group">
+        <input type="submit" value="Добавить строчку журнала" class="btn btn-primary mt-2">
+    </div>
+</form>

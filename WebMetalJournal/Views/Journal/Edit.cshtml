@@ -1,0 +1,48 @@
+﻿@model WebMetalJournal.Models.ViewModel.JournalCreateViewModel
+@{
+    SelectList select = new SelectList(Model.diameterDir, "diam", "diam");
+    ViewBag.Title = "Изменить журнал";
+
+    <form asp-action="Edit" asp-controller="Journal">
+
+        <div class="form-group">
+            <input type="text" class="form-control mt-2" asp-for="Journal.Number" placeholder="Номер" required="required">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control mt-2" asp-for="Journal.Nomenclature" placeholder="Номенклатура" required="required">
+        </div>
+        <div class="form-group">
+            <select class="form-control mt-1" asp-for="Journal.TargetOuterD"
+                    asp-items="select">
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control mt-2" asp-for="Journal.MeasuredOuterDOne" placeholder="Измеренный внешний диаметр 1">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control mt-2" asp-for="Journal.MeasuredOuterDTwo" placeholder="Измеренный внешний диаметр 2">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control mt-2" asp-for="Journal.MeasuredOuterDNotReq" placeholder="Измеренный внешний диаметр">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control mt-2" asp-for="Journal.Note" placeholder="Примечание">
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control mt-2" asp-for="Journal.CreatedForList" placeholder="Примечание">
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control mt-2" asp-for="Journal.MaxDeviat" placeholder="Примечание">
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control mt-2" asp-for="Journal.Id" placeholder="Примечание">
+        </div>
+        @Html.ValidationMessageFor(m => m.Journal)
+        <div class="form-group">
+            <input type="submit" value="Изменить строчку журнала" class="btn btn-primary mt-2">
+        </div>
+    </form>
+
+
+}
